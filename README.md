@@ -2,6 +2,8 @@
 
 UIKit Memory Jogger is a small portfolio app for restarting iOS development after a break. It is intentionally built with UIKit and programmatic layout so the code demonstrates practical iOS fundamentals without Storyboards.
 
+I built this app to refresh and organize the iOS concepts I wanted to remember again, especially UIKit screen structure, navigation, table views, view models, and programmatic Auto Layout. The app works like a compact study companion: it lists UIKit topics, lets me filter them by category, opens a detail screen for each topic, and tracks which concepts I have already reviewed.
+
 ## What it shows
 
 - `UINavigationController` and push navigation.
