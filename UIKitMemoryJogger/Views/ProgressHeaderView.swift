@@ -25,10 +25,14 @@ final class ProgressHeaderView: UIView {
 
         titleLabel.text = "UIKit warm-up"
         titleLabel.font = .preferredFont(forTextStyle: .title3)
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.adjustsFontForContentSizeCategory = true
 
         subtitleLabel.font = .preferredFont(forTextStyle: .subheadline)
         subtitleLabel.textColor = .secondaryLabel
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.lineBreakMode = .byWordWrapping
         subtitleLabel.adjustsFontForContentSizeCategory = true
 
         progressView.progressTintColor = .systemTeal

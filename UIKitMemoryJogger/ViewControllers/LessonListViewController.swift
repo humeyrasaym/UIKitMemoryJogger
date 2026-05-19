@@ -51,6 +51,8 @@ final class LessonListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(LessonCell.self, forCellReuseIdentifier: LessonCell.reuseIdentifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 132
         setupHeaderContainer()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)

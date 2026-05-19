@@ -22,7 +22,8 @@ final class LessonDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = lesson.title
+        title = lesson.category.rawValue
+        navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .systemGroupedBackground
         setupContent()
     }
@@ -36,11 +37,13 @@ final class LessonDetailViewController: UIViewController {
         contentStack.spacing = LessonDetailLayout.stackSpacing
         contentStack.translatesAutoresizingMaskIntoConstraints = false
 
+        let titleLabel = makeTitleLabel(text: lesson.title)
         let summaryLabel = makeLabel(text: lesson.summary, style: .title3, color: .label)
         let reminderLabel = makeCardLabel(text: lesson.reminder)
         let checkpointViews = lesson.checkpoints.map { makeCheckpointLabel(text: $0) }
         let rememberedButton = makeRememberedButton()
 
+        contentStack.addArrangedSubview(titleLabel)
         contentStack.addArrangedSubview(summaryLabel)
         contentStack.addArrangedSubview(reminderLabel)
         checkpointViews.forEach(contentStack.addArrangedSubview)
@@ -61,13 +64,23 @@ final class LessonDetailViewController: UIViewController {
         ])
     }
 
+    private func makeTitleLabel(text: String) -> UILabel {
+        let label = makeLabel(text: text, style: .largeTitle, color: .label)
+        label.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: .systemFont(ofSize: 34, weight: .bold))
+        label.lineBreakMode = .byWordWrapping
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        return label
+    }
+
     private func makeLabel(text: String, style: UIFont.TextStyle, color: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = .preferredFont(forTextStyle: style)
         label.textColor = color
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.adjustsFontForContentSizeCategory = true
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }
 
@@ -77,7 +90,9 @@ final class LessonDetailViewController: UIViewController {
         label.font = .preferredFont(forTextStyle: .body)
         label.textColor = .label
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.adjustsFontForContentSizeCategory = true
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.backgroundColor = .secondarySystemGroupedBackground
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
@@ -96,7 +111,11 @@ final class LessonDetailViewController: UIViewController {
         configuration.imagePadding = 8
         configuration.baseBackgroundColor = .systemTeal
 
+        configuration.titleLineBreakMode = .byWordWrapping
+
         let button = UIButton(configuration: configuration)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
         button.addAction(UIAction { [weak self] _ in
             guard let self else { return }
             self.onToggleRemembered(self.lesson.id)

@@ -31,21 +31,26 @@ final class LessonCell: UITableViewCell {
         selectionStyle = .none
 
         titleLabel.font = .preferredFont(forTextStyle: .headline)
+        titleLabel.numberOfLines = 0
+        titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.adjustsFontForContentSizeCategory = true
 
         summaryLabel.font = .preferredFont(forTextStyle: .subheadline)
         summaryLabel.textColor = .secondaryLabel
-        summaryLabel.numberOfLines = 2
+        summaryLabel.numberOfLines = 0
+        summaryLabel.lineBreakMode = .byWordWrapping
         summaryLabel.adjustsFontForContentSizeCategory = true
 
         badgeLabel.font = .preferredFont(forTextStyle: .caption1)
         badgeLabel.textColor = .systemTeal
+        badgeLabel.numberOfLines = 1
 
         rememberedImageView.setContentHuggingPriority(.required, for: .horizontal)
 
         let textStack = UIStackView(arrangedSubviews: [titleLabel, summaryLabel, badgeLabel])
         textStack.axis = .vertical
         textStack.spacing = 6
+        textStack.setContentCompressionResistancePriority(.required, for: .vertical)
 
         let rowStack = UIStackView(arrangedSubviews: [textStack, rememberedImageView])
         rowStack.alignment = .center
