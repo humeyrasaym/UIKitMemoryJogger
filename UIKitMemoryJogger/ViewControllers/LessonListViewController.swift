@@ -1,5 +1,12 @@
 import UIKit
 
+private enum LessonListLayout {
+    static let horizontalPadding: CGFloat = 16
+    static let topPadding: CGFloat = 12
+    static let sectionSpacing: CGFloat = 20
+    static let headerHeight: CGFloat = 142
+}
+
 final class LessonListViewController: UIViewController {
     private let viewModel: LessonListViewModel
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -34,9 +41,9 @@ final class LessonListViewController: UIViewController {
         view.addSubview(filterControl)
 
         NSLayoutConstraint.activate([
-            filterControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            filterControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            filterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            filterControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: LessonListLayout.topPadding),
+            filterControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LessonListLayout.horizontalPadding),
+            filterControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LessonListLayout.horizontalPadding)
         ])
     }
 
@@ -65,7 +72,7 @@ final class LessonListViewController: UIViewController {
             headerView.topAnchor.constraint(equalTo: headerContainerView.topAnchor),
             headerView.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor),
-            headerView.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20)
+            headerView.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -LessonListLayout.sectionSpacing)
         ])
     }
 
@@ -109,7 +116,7 @@ extension LessonListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        142
+        LessonListLayout.headerHeight
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

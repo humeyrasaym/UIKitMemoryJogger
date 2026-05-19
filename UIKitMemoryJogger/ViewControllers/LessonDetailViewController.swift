@@ -1,5 +1,11 @@
 import UIKit
 
+private enum LessonDetailLayout {
+    static let contentPadding: CGFloat = 24
+    static let stackSpacing: CGFloat = 20
+    static let cardPadding: CGFloat = 18
+}
+
 final class LessonDetailViewController: UIViewController {
     private let lesson: Lesson
     private let onToggleRemembered: (UUID) -> Void
@@ -27,7 +33,7 @@ final class LessonDetailViewController: UIViewController {
 
         let contentStack = UIStackView()
         contentStack.axis = .vertical
-        contentStack.spacing = 16
+        contentStack.spacing = LessonDetailLayout.stackSpacing
         contentStack.translatesAutoresizingMaskIntoConstraints = false
 
         let summaryLabel = makeLabel(text: lesson.summary, style: .title3, color: .label)
@@ -47,11 +53,11 @@ final class LessonDetailViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            contentStack.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 20),
-            contentStack.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: 20),
-            contentStack.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -20),
-            contentStack.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -20)
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            contentStack.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: LessonDetailLayout.contentPadding),
+            contentStack.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor, constant: LessonDetailLayout.contentPadding),
+            contentStack.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor, constant: -LessonDetailLayout.contentPadding),
+            contentStack.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -LessonDetailLayout.contentPadding)
         ])
     }
 
@@ -75,7 +81,7 @@ final class LessonDetailViewController: UIViewController {
         label.backgroundColor = .secondarySystemGroupedBackground
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
-        label.insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        label.insets = UIEdgeInsets(top: LessonDetailLayout.cardPadding, left: LessonDetailLayout.cardPadding, bottom: LessonDetailLayout.cardPadding, right: LessonDetailLayout.cardPadding)
         return label
     }
 
