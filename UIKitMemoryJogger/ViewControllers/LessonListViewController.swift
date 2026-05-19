@@ -19,6 +19,7 @@ final class LessonListViewController: UIViewController {
         super.viewDidLoad()
         title = "Memory Jogger"
         view.backgroundColor = .systemGroupedBackground
+        tableView.backgroundColor = .systemGroupedBackground
         setupFilterControl()
         setupTableView()
         bindViewModel()
@@ -49,7 +50,7 @@ final class LessonListViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: filterControl.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 
