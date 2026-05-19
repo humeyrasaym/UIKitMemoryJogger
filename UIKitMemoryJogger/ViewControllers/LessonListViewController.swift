@@ -4,6 +4,7 @@ final class LessonListViewController: UIViewController {
     private let viewModel: LessonListViewModel
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     private let headerView = ProgressHeaderView()
+    private let headerContainerView = UIView()
     private let filterControl = UISegmentedControl(items: LessonListViewModel.Filter.allCases.map(\.title))
 
     init(viewModel: LessonListViewModel) {
@@ -43,6 +44,7 @@ final class LessonListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(LessonCell.self, forCellReuseIdentifier: LessonCell.reuseIdentifier)
+        setupHeaderContainer()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
 
@@ -51,6 +53,19 @@ final class LessonListViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+
+    private func setupHeaderContainer() {
+        headerContainerView.backgroundColor = .clear
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerContainerView.addSubview(headerView)
+
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: headerContainerView.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor),
+            headerView.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20)
         ])
     }
 
@@ -90,11 +105,11 @@ extension LessonListViewController: UITableViewDataSource {
 
 extension LessonListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView
+        headerContainerView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        118
+        142
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
